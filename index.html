@@ -53,6 +53,11 @@ button:hover{
 background:#1d4ed8;
 }
 
+.error{
+color:red;
+font-size:12px;
+}
+
 </style>
 
 <h1>Student Login</h1>
@@ -60,19 +65,24 @@ background:#1d4ed8;
 <form>
 
 <label>First Name</label>
-<input type="text">
+<input type="text" id="firstName">
+<p id="firstNameError" class="error"></p>
 
 <label>Last Name</label>
-<input type="text">
+<input type="text" id="lastName">
+<p id="lastNameError" class="error"></p>
 
 <label>Email</label>
-<input type="email">
+<input type="email" id="email">
+<p id="emailError" class="error"></p>
 
 <label>Password</label>
-<input type="password">
+<input type="password" id="password">
+<p id="passwordError" class="error"></p>
 
 <label>Student ID</label>
-<input type="text">
+<input type="text" id="studentId">
+<p id="studentIdError" class="error"></p>
 
 <button type="submit">Login</button>
 
