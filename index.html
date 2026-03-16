@@ -3,90 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Milena Pires - 75632 - Login Form</title>
-</head>
 
-<body>
+<style>
 
-    <style>
-
+/* Page styling */
 body{
-font-family: Arial;
-background:#f4f4f4;
+font-family: Arial, Helvetica, sans-serif;
+background:#f4f6fb;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+margin:0;
 }
 
-form{
+/* Container */
+.container{
 background:white;
-padding:25px;
+padding:30px;
 border-radius:10px;
-width:320px;
-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+width:350px;
+box-shadow:0 6px 20px rgba(0,0,0,0.15);
 }
 
+/* Title */
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* Form fields */
 label{
 display:block;
-margin-top:10px;
+margin-top:12px;
+font-weight:bold;
 }
 
 input{
 width:100%;
-padding:8px;
+padding:10px;
 margin-top:5px;
+border:1px solid #ccc;
+border-radius:6px;
 }
 
+/* Button */
 button{
-margin-top:15px;
+margin-top:18px;
 width:100%;
 padding:10px;
 background:#2563eb;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
+font-size:16px;
 }
 
 button:hover{
 background:#1d4ed8;
 }
 
+/* Error messages */
 .error{
 color:red;
 font-size:12px;
+margin-top:4px;
+display:none;
+}
+
+/* Success message */
+.success{
+display:none;
+text-align:center;
+color:green;
+font-size:18px;
 }
 
 </style>
 
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Login form -->
+<div id="formContainer">
+
 <h1>Student Login</h1>
 
-<form>
+<form id="loginForm">
 
 <label>First Name</label>
 <input type="text" id="firstName">
-<p id="firstNameError" class="error"></p>
+<p class="error" id="firstNameError">First name is required</p>
 
 <label>Last Name</label>
 <input type="text" id="lastName">
-<p id="lastNameError" class="error"></p>
+<p class="error" id="lastNameError">Last name is required</p>
 
 <label>Email</label>
 <input type="email" id="email">
-<p id="emailError" class="error"></p>
+<p class="error" id="emailError">Enter a valid email</p>
 
 <label>Password</label>
 <input type="password" id="password">
-<p id="passwordError" class="error"></p>
+<p class="error" id="passwordError">Password must be at least 6 characters</p>
 
 <label>Student ID</label>
 <input type="text" id="studentId">
-<p id="studentIdError" class="error"></p>
+<p class="error" id="studentIdError">Student ID is required</p>
 
 <button type="submit">Login</button>
 
 </form>
+
+</div>
+
+<!-- Success message -->
+<div class="success" id="successMessage">
+Login successful! <br><br>
+Welcome student 🎉
+</div>
+
+</div>
+
+<script>
+
+/*
+Form validation script
+Prevents submission if fields are invalid
+Shows field specific error messages
+*/
+
+const form = document.getElementById("loginForm")
+
+const firstName = document.getElementById("firstName")
+const lastName = document.getElementById("lastName")
+const email = document.getElementById("email")
+const password = document.getElementById("password")
+const studentId = document.getElementById("studentId")
+
+const formContainer = document.getElementById("formContainer")
+const successMessage = document.getElementById("successMessage")
+
+/* Error elements */
+
+const firstNameError = document.getElementById("firstNameError")
+const lastNameError = document.getElementById("lastNameError")
+const emailError = document.getElementById("emailError")
+const passwordError = document.getElementById("passwordError")
+const studentIdError = document.getElementById("studentIdError")
+
+/* Email validation regex */
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault()
+
+let valid = true
+
+/* First Name validation */
+
+if(firstName.value.trim() === ""){
+firstNameError.style.display = "block"
+valid = false
+}else{
+firstNameError.style.display = "none"
+}
+
+/* Last Name validation */
+
+if(lastName.value.trim() === ""){
+lastNameError.style.display = "block"
+valid = false
+}else{
+lastNameError.style.display = "none"
+}
+
+/* Email validation */
+
+if(!emailPattern.test(email.value)){
+emailError.style.display = "block"
+valid = false
+}else{
+emailError.style.display = "none"
+}
+
+/* Password validation */
+
+if(password.value.length < 6){
+passwordError.style.display = "block"
+valid = false
+}else{
+passwordError.style.display = "none"
+}
+
+/* Student ID validation */
+
+if(studentId.value.trim() === ""){
+studentIdError.style.display = "block"
+valid = false
+}else{
+studentIdError.style.display = "none"
+}
+
+/* If everything is valid */
+
+if(valid){
+
+form.reset()
+
+formContainer.style.display = "none"
+successMessage.style.display = "block"
+
+}
+
+})
+
+</script>
 
 </body>
 </html>
